@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اطلب الطباعة</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="mainNav">
+    <h2>اطبع</h2>
+    <div>
+      <a href="index.html" class="btn ghost">الواجهة</a>
+      <button id="contactBtn" class="btn primary">تواصل معنا</button>
+    </div>
+  </nav>
+
+  <section id="appArea">
+    <h2>نموذج طلب الطباعة</h2>
+    <form id="orderForm" enctype="multipart/form-data">
+      <!-- Upload PDF or Image -->
+      <label>اختر ملف (PDF أو صورة)</label>
+      <input type="file" name="file" accept="application/pdf,image/*" required>
+
+      <!-- Paper size and print type -->
+      <div class="row">
+        <div class="field">
+          <label>حجم الورق</label>
+          <select name="paperSize">
+            <option value="A4">A4</option>
+            <option value="A3">A3</option>
+            <option value="Letter">Letter</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>نوع الطباعة</label>
+          <select name="printType">
+            <option value="bw">أسود/أبيض</option>
+            <option value="color">ملون</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Packaging and delivery -->
+      <div class="row">
+        <div class="field">
+          <label>التغليف</label>
+          <select name="packaging">
+            <option value="none">بدون</option>
+            <option value="envelope">مغلف</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>طريقة التوصيل</label>
+          <select name="delivery">
+            <option value="pickup">استلام من الفرع</option>
+            <option value="home">توصيل للبيت</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Print item type -->
+      <div class="row">
+        <div class="field">
+          <label>اختر نوع الطباعة</label>
+          <select name="itemType">
+            <option value="image">صورة</option>
+            <option value="poster">بوستر</option>
+            <option value="magazine">مجلة</option>
+            <option value="notebook">ملزمة عادية</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn primary full">إرسال الطلب</button>
+      <div id="result" class="result"></div>
+    </form>
+
+    <h3>الطلبات المرسلة</h3>
+    <div id="ordersList" class="orders-grid"></div>
+  </section>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h3>تواصل معنا</h3>
+      <p>📞 الهاتف: 077XXXXXXX</p>
+      <p>✉ البريد: print2025@gmail.com</p>
+      <p>📍 العنوان: البصرة، العراق</p>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>

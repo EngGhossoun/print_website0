@@ -1,115 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>اطبع — خدمة الطباعة</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اطبع — خدمة الطباعة</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="app">
-
-    <!-- Landing -->
-    <section id="landing" class="page visible">
-      <div class="card">
-        <div class="left">
-          <h1>خدمة الطباعة السريعة</h1>
-          <p>ارفعي ملف PDF، اختاري خيارات الطباعة والتغليف، وقرري استلام من الفرع أو توصيل للبيت.</p>
-
-          <div class="actions">
-            <button id="startBtn" class="btn primary">ابدأ الطلب</button>
-            <button id="aboutBtn" class="btn ghost">شنو الخدمات؟</button>
-          </div>
-
-          <ul class="info">
-            <li>• رفع ملفات PDF حتى 20MB</li>
-            <li>• طباعة أبيض/أسود أو ملون</li>
-            <li>• خيارات تغليف وطرق توصيل</li>
-          </ul>
-        </div>
-
-        <div class="right">
-          <div class="card-mini">
-            <h3>ليش تختارنا؟</h3>
-            <p>جودة واضحة، أسعار سهلة، وتتبع الطلب.</p>
-
-            <div class="grid-mini">
-              <div><small>استلام</small><b>الفرع</b></div>
-              <div><small>توصيل</small><b>البيت</b></div>
-              <div><small>نوع ورق</small><b>A4 / A3</b></div>
-              <div><small>الطباعة</small><b>أسود/ملون</b></div>
-            </div>
-
-           
-          </div>
-        </div>
+  <section id="landing">
+    <div class="landing-container">
+      <h1>خدمة الطباعة السريعة</h1>
+      <p>ارفع ملف PDF، اختر خيارات الطباعة والتغليف، واستلم من الفرع أو التوصيل للبيت.</p>
+      <div class="landing-buttons">
+        <a href="order.html" class="btn primary">ابدأ الطلب</a>
+        <a href="services.html" class="btn ghost">شنو الخدمات؟</a>
       </div>
-    </section>
-
-    <!-- Print Form -->
-    <section id="printForm" class="page">
-      <div class="form-header">
-        <h2>نموذج طلب الطباعة</h2>
-        <div>
-          <button id="backBtn" class="btn">رجوع</button>
-        </div>
-      </div>
-
-      <div class="form-card">
-        <form id="orderForm" enctype="multipart/form-data">
-          <label>اختر ملف PDF</label>
-          <input type="file" name="file" accept="application/pdf" required>
-
-          <div class="row">
-            <div class="field">
-              <label>حجم الورق</label>
-              <select name="paperSize">
-                <option value="A4">A4</option>
-                <option value="A3">A3</option>
-                <option value="Letter">Letter</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label>نوع الطباعة</label>
-              <select name="printType">
-                <option value="bw">أسود و أبيض</option>
-                <option value="color">ملون</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="field">
-              <label>التغليف</label>
-              <select name="packaging">
-                <option value="none">بدون</option>
-                <option value="envelope">مغلف</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label>طريقة التوصيل</label>
-              <select name="delivery">
-                <option value="pickup">استلام من الفرع</option>
-                <option value="home">توصيل للمنزل</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="submit" class="btn primary full">إرسال الطلب</button>
-          <div id="result" class="result"></div>
-        </form>
-      </div>
-
-      <h3 class="orders-title">الطلبات المرسلة</h3>
-      <div id="ordersList" class="orders-grid">
-        <!-- Orders injected here -->
-      </div>
-    </section>
-
-  </div>
-
-  <script src="app.js"></script>
+    </div>
+  </section>
 </body>
 </html>

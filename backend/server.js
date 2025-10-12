@@ -1,4 +1,3 @@
-// print_website_scaffold/backend/server.js
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -9,48 +8,48 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// مجلد الواجهة
-const FRONTEND_DIR = path.join(__dirname, '..');
-app.use(express.static(FRONTEND_DIR));
+// المجلد الرئيسي للواجهة (HTML, CSS, JS) هو مجلد فوق backend
+app.use(express.static(path.join(__dirname, '..'))); 
 
-// توجيه "/" لindex.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
-});
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if(!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR);
 
-// مجلد رفع الملفات
-const UPLOADS_DIR = path.join(FRONTEND_DIR, 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR);
-
+// multer لقبول PDF و صور
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
-  filename: (req, file, cb) => {
+  destination: (req,file,cb)=>cb(null,UPLOADS_DIR),
+  filename: (req,file,cb)=>{
     const unique = Date.now() + '-' + Math.round(Math.random()*1e6);
     const ext = path.extname(file.originalname);
     cb(null, unique + ext);
   }
 });
-const upload = multer({ storage, limits: { fileSize: 20 * 1024 * 1024 } }); // 20MB
+const upload = multer({ 
+  storage, 
+  limits: { fileSize: 20*1024*1024 },
+  fileFilter: (req,file,cb)=>{
+    const allowed = /pdf|jpeg|jpg|png|gif/;
+    const ext = path.extname(file.originalname).toLowerCase();
+    if(allowed.test(ext)) cb(null,true);
+    else cb(new Error('مسموح PDF أو صور فقط'));
+  }
+});
 
-// ملف الطلبات
-const ORDERS_FILE = path.join(FRONTEND_DIR, 'orders.json');
+const ORDERS_FILE = path.join(__dirname, 'orders.json');
 function readOrders(){
-  try {
+  try{
     const raw = fs.readFileSync(ORDERS_FILE,'utf8');
     return JSON.parse(raw || '[]');
-  } catch(e){
-    return [];
-  }
+  }catch(e){ return []; }
 }
 function saveOrders(arr){
-  fs.writeFileSync(ORDERS_FILE, JSON.stringify(arr, null, 2));
+  fs.writeFileSync(ORDERS_FILE, JSON.stringify(arr,null,2));
 }
 
 // رفع ملف
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ message: 'محتاج ملف PDF' });
-    const { paperSize = '', printType = '', packaging = '', delivery = '' } = req.body;
+app.post('/api/upload', upload.single('file'), (req,res)=>{
+  try{
+    if(!req.file) return res.status(400).json({ message: 'محتاج ملف PDF أو صورة' });
+    const { paperSize='', printType='', packaging='', delivery='', itemType='' } = req.body;
     const orders = readOrders();
     const orderId = 'ORD-' + Date.now().toString(36).toUpperCase().slice(-6);
     const newOrder = {
@@ -61,20 +60,21 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
       printType,
       packaging,
       delivery,
+      itemType,
       status: 'جديد',
       createdAt: new Date().toISOString()
     };
     orders.push(newOrder);
     saveOrders(orders);
     res.json({ ok:true, orderId });
-  } catch (err) {
+  }catch(err){
     console.error(err);
-    res.status(500).json({ message: 'خطأ بالخادم' });
+    res.status(500).json({ message:'خطأ بالخادم' });
   }
 });
 
 // جلب الطلبات
-app.get('/api/orders', (req, res) => {
+app.get('/api/orders',(req,res)=>{
   const orders = readOrders();
   res.json(orders);
 });

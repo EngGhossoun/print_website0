@@ -1,4 +1,6 @@
-/* ستايل بسيط ومرتب — بدون Tailwind */
+/* =======================
+   General
+======================= */
 :root{
   --bg:#f6f8fb;
   --card:#ffffff;
@@ -7,47 +9,251 @@
   --accent:#eef6ff;
 }
 
-*{box-sizing:border-box;font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif}
-body{margin:0;background:var(--bg);color:#111}
-.page{display:none;padding:28px}
-.page.visible{display:block}
-.card{max-width:1000px;margin:40px auto;background:var(--card);border-radius:12px;display:flex;overflow:hidden;box-shadow:0 8px 30px rgba(15,23,42,0.08)}
-.left{flex:1;padding:36px}
-.right{width:360px;background:linear-gradient(180deg,var(--accent),#fff);padding:28px;border-left:1px solid #f0f3f8}
-h1{margin:0 0 12px;font-size:28px;color:#0f172a}
-h2{margin:0 0 8px;color:var(--primary)}
-p{color:var(--muted);line-height:1.45}
-.actions{margin-top:18px;display:flex;gap:10px}
-.btn{padding:10px 14px;border-radius:8px;border:1px solid transparent;background:#fff;cursor:pointer;font-weight:600}
-.btn:hover{opacity:0.95}
-.btn.primary{background:var(--primary);color:#fff;border-color:transparent}
-.btn.ghost{background:transparent;border:1px solid #e6eef9;color:var(--primary)}
-.info{margin-top:14px;color:var(--muted);padding-left:16px}
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-.card-mini{background:#fff;padding:16px;border-radius:10px;box-shadow:0 4px 16px rgba(12,18,36,0.04)}
-.grid-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
-.grid-mini div{background:rgba(11,118,209,0.06);padding:8px;border-radius:8px;text-align:center}
-.grid-mini small{display:block;color:var(--muted);font-size:12px}
-.note{font-size:12px;color:var(--muted);margin-top:10px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111;
+}
 
-/* Form page */
-.form-header{max-width:1000px;margin:20px auto;display:flex;justify-content:space-between;align-items:center;padding:0 8px}
-.form-card{max-width:1000px;margin:8px auto;background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 22px rgba(2,6,23,0.06)}
-label{display:block;margin-bottom:6px;font-weight:600;color:#111}
-input[type=file],select,input[type=text]{width:100%;padding:10px;border:1px solid #e6eef9;border-radius:8px;background:#fcfdff}
-.row{display:flex;gap:12px;margin-top:12px}
-.field{flex:1}
-.full{width:100%;margin-top:14px}
+/* =======================
+   Buttons
+======================= */
+.btn{
+  padding:10px 16px;
+  border-radius:8px;
+  border:1px solid transparent;
+  cursor:pointer;
+  font-weight:600;
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
 
-/* Result + orders */
-.result{margin-top:12px;font-weight:700;color:green}
-.orders-title{max-width:1000px;margin:18px auto 8px;padding-left:8px;color:#0f172a}
-.orders-grid{max-width:1000px;margin:0 auto 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;padding:8px}
-.order-card{background:#fff;padding:12px;border-radius:10px;border-left:4px solid var(--primary);box-shadow:0 6px 18px rgba(2,6,23,0.04)}
+.btn:hover{opacity:0.9}
+
+.btn.primary{
+  background:var(--primary);
+  color:#fff;
+  border-color:transparent;
+}
+
+.btn.ghost{
+  background:transparent;
+  border:1px solid #e6eef9;
+  color:var(--primary);
+}
+
+/* =======================
+   Landing Page
+======================= */
+.landing-container{
+  max-width:800px;
+  margin:80px auto;
+  background:var(--card);
+  padding:40px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 8px 30px rgba(15,23,42,0.08);
+}
+
+.landing-container h1{
+  margin-bottom:16px;
+  font-size:32px;
+  color:#0f172a;
+}
+
+.landing-container p{
+  margin-bottom:24px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.landing-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+/* =======================
+   Navbar
+======================= */
+nav#mainNav{
+  max-width:1000px;
+  margin:20px auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 16px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.05);
+}
+
+nav#mainNav h2{
+  margin:0;
+  color:var(--primary);
+}
+
+nav#mainNav div a, nav#mainNav div button{
+  margin-left:8px;
+}
+
+/* =======================
+   Order Form
+======================= */
+#appArea{
+  max-width:1000px;
+  margin:40px auto;
+  background:var(--card);
+  padding:28px;
+  border-radius:12px;
+  box-shadow:0 8px 30px rgba(15,23,42,0.08);
+}
+
+#appArea h2{
+  margin-bottom:16px;
+  color:var(--primary);
+}
+
+#orderForm{
+  display:grid;
+  gap:16px;
+}
+
+#orderForm input[type=file],
+#orderForm select{
+  width:100%;
+  padding:10px;
+  border:1px solid #e6eef9;
+  border-radius:8px;
+  background:#fcfdff;
+}
+
+#orderForm button{margin-top:8px}
+
+#result{
+  margin-top:10px;
+  font-weight:700;
+}
+
+/* Orders List */
+#ordersList{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+  margin-top:24px;
+}
+
+.order-card{
+  background:#fff;
+  padding:16px;
+  border-radius:10px;
+  border-left:4px solid var(--primary);
+  box-shadow:0 6px 18px rgba(2,6,23,0.04);
+}
+
 .order-card p{margin:6px 0;color:#223}
 
+/* =======================
+   Contact Modal
+======================= */
+.modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.modal.hidden{display:none;}
+
+.modal-content{
+  background:#fff;
+  padding:24px;
+  border-radius:12px;
+  max-width:400px;
+  width:90%;
+  text-align:center;
+  position:relative;
+  box-shadow:0 8px 30px rgba(0,0,0,0.15);
+}
+
+.modal-content h3{margin-bottom:12px;color:var(--primary);}
+.modal-content p{margin:6px 0;color:#555;}
+.close{
+  position:absolute;
+  top:12px;
+  right:16px;
+  font-size:22px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* =======================
+   Services Page
+======================= */
+.services-section{
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 16px;
+  text-align:center;
+}
+
+.services-section h2{
+  font-size:28px;
+  color:var(--primary);
+  margin-bottom:10px;
+}
+
+.services-section p{
+  color:var(--muted);
+  margin-bottom:24px;
+}
+
+/* Cards */
+.cards-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+.service-card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:0.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+
+.service-card h3{
+  margin-bottom:8px;
+  color:var(--primary);
+}
+
+.service-card p{margin:0;color:#555}
+
+/* =======================
+   Responsive
+======================= */
 @media (max-width:800px){
-  .card{flex-direction:column}
-  .right{width:100%;border-left:0;border-top:1px solid #f0f3f8}
-  .row{flex-direction:column}
+  .landing-container, #appArea, nav#mainNav{margin:20px auto;padding:20px}
+  .landing-buttons{flex-direction:column}
+  #ordersList{grid-template-columns:1fr}
+  .cards-container{grid-template-columns:1fr}
 }
