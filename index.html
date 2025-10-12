@@ -1,21 +1,84 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اطبع — خدمة الطباعة</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>اطبع — الصفحة الرئيسية</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <section id="landing">
-    <div class="landing-container">
-      <h1>خدمة الطباعة السريعة</h1>
-      <p>ارفع ملف PDF، اختر خيارات الطباعة والتغليف، واستلم من الفرع أو التوصيل للبيت.</p>
-      <div class="landing-buttons">
-        <a href="order.html" class="btn primary">ابدأ الطلب</a>
-        <a href="services.html" class="btn ghost">شنو الخدمات؟</a>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect width="24" height="24" rx="6" fill="#0b76d1"></rect>
+          <path d="M6 12h12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M6 8h12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">اطبع</span>
+          <small class="brand-sub">خدمة الطباعة</small>
+        </div>
+      </div>
+
+      <nav class="links">
+        <a href="index.html" class="nav-link">الأسعار</a>
+        <a href="services.html" class="nav-link">الخدمات</a>
+        <a href="support.html" class="nav-link">دعم</a>
+        <a href="order.html" class="btn nav-cta">اطلب الآن</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="hero-inner">
+      <div class="hero-illustration left">
+        <svg width="160" height="160" viewBox="0 0 160 160" aria-hidden>
+          <rect x="6" y="10" width="120" height="120" rx="12" fill="#eef6ff"/>
+          <circle cx="80" cy="60" r="20" fill="#0b76d1"/>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <p class="kicker">خدمة سريعة — سعر واضح — توصيل آمن</p>
+        <h1>
+          زيد وعيك مع
+          <span class="big">خدمة الطباعة</span>
+        </h1>
+        <svg class="underline" viewBox="0 0 300 30" aria-hidden>
+          <path d="M10 18 C 70 2, 180 28, 290 12" stroke="#1e90ff" stroke-width="6" stroke-linecap="round" fill="none" stroke-linejoin="round" opacity="0.95"/>
+        </svg>
+        <p class="lead">اطبع مستنداتك وصورك بجودة عالية—A4 / A3 / بوسترات — وخدمات تغليف وتوصيل حسب اختيارك.</p>
+
+        <form id="heroForm" class="email-form" autocomplete="off">
+          <input id="emailInput" type="email" placeholder="أدخل بريدك الإلكتروني" aria-label="email" required>
+          <button class="btn primary" type="submit">سجّل نسخة تجريبية</button>
+        </form>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">جوائز وإنجازات</div>
+          </div>
+          <div class="divider" aria-hidden></div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">رضى العملاء خلال 10 سنوات</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-illustration right">
+        <svg width="160" height="160" viewBox="0 0 160 160" aria-hidden>
+          <rect x="20" y="6" width="110" height="110" rx="12" fill="#fff6ee" stroke="#ffd6a5" stroke-width="3"/>
+          <circle cx="110" cy="40" r="14" fill="#0b76d1"/>
+        </svg>
       </div>
     </div>
-  </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>

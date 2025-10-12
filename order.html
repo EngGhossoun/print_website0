@@ -19,11 +19,9 @@
   <section id="appArea">
     <h2>نموذج طلب الطباعة</h2>
     <form id="orderForm" enctype="multipart/form-data">
-      <!-- Upload PDF or Image -->
       <label>اختر ملف (PDF أو صورة)</label>
       <input type="file" name="file" accept="application/pdf,image/*" required>
 
-      <!-- Paper size and print type -->
       <div class="row">
         <div class="field">
           <label>حجم الورق</label>
@@ -42,7 +40,6 @@
         </div>
       </div>
 
-      <!-- Packaging and delivery -->
       <div class="row">
         <div class="field">
           <label>التغليف</label>
@@ -60,7 +57,6 @@
         </div>
       </div>
 
-      <!-- Print item type -->
       <div class="row">
         <div class="field">
           <label>اختر نوع الطباعة</label>
@@ -81,13 +77,12 @@
     <div id="ordersList" class="orders-grid"></div>
   </section>
 
-  <!-- Contact Modal -->
   <div id="contactModal" class="modal hidden">
     <div class="modal-content">
       <span id="closeModal" class="close">&times;</span>
       <h3>تواصل معنا</h3>
       <p>📞 الهاتف: 077XXXXXXX</p>
-      <p>✉ البريد: print2025@gmail.com</p>
+      <p>✉ البريد: info@print.com</p>
       <p>📍 العنوان: البصرة، العراق</p>
     </div>
   </div>
