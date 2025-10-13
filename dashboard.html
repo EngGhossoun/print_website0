@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - اطبع</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    /* Navbar موجود كما هو */
+    nav {
+      background: #4f46e5;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo { font-size: 22px; font-weight: bold; }
+    nav .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav .nav-links a:hover { text-decoration: underline; }
+
+    /* Hero Section */
+    .hero {
+      background: url('images/print-hero.jpg') center/cover no-repeat;
+      color: #1d0707;
+      text-align: center;
+      padding: 120px 20px 80px;
+    }
+    .hero h1 { font-size: 48px; margin-bottom: 20px; }
+    .hero p { font-size: 20px; margin-bottom: 30px; }
+
+    .hero .btn {
+      background: #ffcd00;
+      color: #4f46e5;
+      font-weight: bold;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    .hero .btn:hover { background: #fbbf24; }
+
+    /* Services Section */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .service-card h3 { color: #4f46e5; margin-bottom: 15px; }
+    .service-card p { color: #555; margin-bottom: 20px; }
+    .service-card .btn { padding: 10px 20px; background: #4f46e5; color: #fff; border-radius: 8px; }
+    .service-card .btn:hover { background: #4338ca; }
+
+    /* Prices Section */
+    .prices {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .prices h2 { color: #4f46e5; margin-bottom: 30px; font-size: 32px; }
+    .price-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .price-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(36, 28, 28, 0.872);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .price-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .price-card h3 { color: #4f46e5; margin-bottom: 12px; }
+    .price-card p { font-size: 18px; color: #555; margin-bottom: 15px; }
+    .price-card .btn { background: #ffcd00; color: #4f46e5; padding: 10px 18px; border-radius: 8px; font-weight: bold; text-decoration: none; }
+    .price-card .btn:hover { background: #fbbf24; }
+
+    /* Footer */
+    footer {
+      background: #4f46e5;
+      color: #312d2d;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar كما هو -->
+  <nav>
+    <div class="logo">طباعة</div>
+    <div class="nav-links">
+      <a href="services.html">الخدمات</a>
+      <a href="prices.html">الأسعار</a>
+      <a href="support.html">الدعم</a>
+      <a href="order.html">طلب الآن</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>خدمة الطباعة الاحترافية</h1>
+    <p>أفضل جودة وسرعة في الطباعة لكل احتياجاتك.</p>
+    <a href="order.html" class="btn">اطلب الآن</a>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="service-card">
+      <h3>طباعة سريعة</h3>
+      <p>استلم طلبك في أقل وقت ممكن مع جودة ممتازة.</p>
+      <a href="order.html" class="btn">اطلب الآن</a>
+    </div>
+    <div class="service-card">
+      <h3>طباعة ملونة</h3>
+      <p>ألوان زاهية ومطابقة لأعلى معايير الجودة.</p>
+      <a href="order.html" class="btn">اطلب الآن</a>
+    </div>
+    <div class="service-card">
+      <h3>طباعة كبيرة</h3>
+      <p>بوسترات وملصقات بأحجام كبيرة لتناسب جميع المشاريع.</p>
+      <a href="order.html" class="btn">اطلب الآن</a>
+    </div>
+  </section>
+
+  <!-- Prices Section -->
+  <section class="prices">
+    <h2>أسعار خدماتنا</h2>
+    <div class="price-cards">
+      <div class="price-card">
+        <h3>طباعة A4</h3>
+        <p>5000 د.ع</p>
+        <a href="order.html?type=document&size=A4" class="btn">اطلب الآن</a>
+      </div>
+      <div class="price-card">
+        <h3>طباعة A3</h3>
+        <p>8000 د.ع</p>
+        <a href="order.html?type=document&size=A3" class="btn">اطلب الآن</a>
+      </div>
+      <div class="price-card">
+        <h3>طباعة ملونة</h3>
+        <p>10000 د.ع</p>
+        <a href="order.html?type=color" class="btn">اطلب الآن</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>جميع الحقوق محفوظة © 2025 اطبع</p>
+  </footer>
+
+</body>
+</html>

@@ -1,84 +1,77 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>اطبع — الصفحة الرئيسية</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    .login-container h1 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #4f46e5;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .login-container button:hover {
+      background: #4338ca;
+    }
+  </style>
 </head>
 <body>
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="brand">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <rect width="24" height="24" rx="6" fill="#0b76d1"></rect>
-          <path d="M6 12h12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M6 8h12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="brand-text">
-          <span class="brand-name">اطبع</span>
-          <small class="brand-sub">خدمة الطباعة</small>
-        </div>
-      </div>
+  <div class="login-container">
+    <h1>تسجيل الدخول</h1>
+    <input type="text" id="emailOrPhone" placeholder="الإيميل أو رقم الجوال">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">تسجيل الدخول</button>
+  </div>
 
-      <nav class="links">
-        <a href="index.html" class="nav-link">الأسعار</a>
-        <a href="services.html" class="nav-link">الخدمات</a>
-        <a href="support.html" class="nav-link">دعم</a>
-        <a href="order.html" class="btn nav-cta">اطلب الآن</a>
-      </nav>
-    </div>
-  </header>
+  <script>
+    function login() {
+      const emailOrPhone = document.getElementById('emailOrPhone').value;
+      const password = document.getElementById('password').value;
 
-  <!-- HERO -->
-  <main class="hero">
-    <div class="hero-inner">
-      <div class="hero-illustration left">
-        <svg width="160" height="160" viewBox="0 0 160 160" aria-hidden>
-          <rect x="6" y="10" width="120" height="120" rx="12" fill="#eef6ff"/>
-          <circle cx="80" cy="60" r="20" fill="#0b76d1"/>
-        </svg>
-      </div>
-
-      <div class="hero-content">
-        <p class="kicker">خدمة سريعة — سعر واضح — توصيل آمن</p>
-        <h1>
-          زيد وعيك مع
-          <span class="big">خدمة الطباعة</span>
-        </h1>
-        <svg class="underline" viewBox="0 0 300 30" aria-hidden>
-          <path d="M10 18 C 70 2, 180 28, 290 12" stroke="#1e90ff" stroke-width="6" stroke-linecap="round" fill="none" stroke-linejoin="round" opacity="0.95"/>
-        </svg>
-        <p class="lead">اطبع مستنداتك وصورك بجودة عالية—A4 / A3 / بوسترات — وخدمات تغليف وتوصيل حسب اختيارك.</p>
-
-        <form id="heroForm" class="email-form" autocomplete="off">
-          <input id="emailInput" type="email" placeholder="أدخل بريدك الإلكتروني" aria-label="email" required>
-          <button class="btn primary" type="submit">سجّل نسخة تجريبية</button>
-        </form>
-
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-num">500+</div>
-            <div class="stat-label">جوائز وإنجازات</div>
-          </div>
-          <div class="divider" aria-hidden></div>
-          <div class="stat">
-            <div class="stat-num">100%</div>
-            <div class="stat-label">رضى العملاء خلال 10 سنوات</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-illustration right">
-        <svg width="160" height="160" viewBox="0 0 160 160" aria-hidden>
-          <rect x="20" y="6" width="110" height="110" rx="12" fill="#fff6ee" stroke="#ffd6a5" stroke-width="3"/>
-          <circle cx="110" cy="40" r="14" fill="#0b76d1"/>
-        </svg>
-      </div>
-    </div>
-  </main>
-
-  <script src="app.js"></script>
+      if(emailOrPhone && password) {
+        // إذا تحبين ممكن تضيفين تحقق من البيانات هنا
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('الرجاء إدخال جميع البيانات');
+      }
+    }
+  </script>
 </body>
 </html>
