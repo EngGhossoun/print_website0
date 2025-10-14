@@ -1,77 +1,183 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>اطبع — تسجيل الدخول</title>
+
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #a8edea, #fed6e3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+    :root{
+      --accent:#0b76d1;
+      --accent2:#0b8760;
+      --dark:#06202b;
+      --card-bg:#fff;
     }
-    .login-container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      width: 350px;
-      text-align: center;
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Tahoma, Verdana, sans-serif;background:#f6fbff;color:var(--dark);-webkit-font-smoothing:antialiased}
+    .login-hero {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px 20px;
+      background: linear-gradient(180deg,#f7fbfd,#eef7fb);
     }
-    .login-container h1 {
-      margin-bottom: 25px;
-      color: #333;
+    .login-panel {
+      max-width:1200px;
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr 440px;
+      gap:36px;
+      align-items:center;
+      padding:18px;
     }
-    .login-container input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
+
+    /* left marketing */
+    .hero-left {
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      min-height:420px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:48px;
+      color:#fff;
+      /* لو عندچ صورة حطي مسارها بدل linear-gradient */
+      background:
+        linear-gradient(180deg, rgba(11,118,209,0.86), rgba(11,118,209,0.86));
     }
-    .login-container button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 8px;
-      background: #4f46e5;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:16px;opacity:0.95}
+    .brand svg{filter:drop-shadow(0 3px 6px rgba(0,0,0,0.12))}
+    .brand h1{font-size:18px;color:#fff;margin:0;font-weight:800}
+    .hero-title{font-size:48px;line-height:1.02;margin:6px 0 12px;font-weight:900;text-shadow:0 4px 18px rgba(0,0,0,0.18)}
+    .hero-sub{color:rgba(255,255,255,0.92);max-width:680px;font-size:17px;margin-bottom:18px;opacity:0.95}
+    .hero-cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .hero-cta .btn{padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;color:#fff;border:0;cursor:pointer;background:rgba(255,255,255,0.08)}
+    .hero-cta .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.12)}
+
+    /* right login card */
+    .login-card{
+      background:var(--card-bg);
+      border-radius:14px;
+      box-shadow: 0 30px 50px rgba(7,22,37,0.08);
+      padding:26px;
+      border: 1px solid rgba(7,22,37,0.04);
+      position:relative;
     }
-    .login-container button:hover {
-      background: #4338ca;
+    .login-card h3{margin:0 0 6px;font-size:20px;color:var(--dark)}
+    .small-desc{color:#6b7280;font-size:14px;margin-bottom:12px}
+    .form-row{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+    input[type="text"], input[type="password"]{
+      padding:12px 14px;border-radius:8px;border:1px solid #e6eef9;font-size:15px;outline:none;transition:box-shadow .16s,border-color .16s;
+    }
+    input:focus{box-shadow:0 8px 24px rgba(11,118,209,0.06);border-color:var(--accent)}
+    .login-actions{display:flex;gap:10px;margin-top:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .login-actions .btn{background:var(--accent);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer}
+    .login-actions .btn.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+    .or-line{display:flex;align-items:center;gap:12px;margin:14px 0;color:#9aa8b5;font-size:13px}
+    .or-line::before,.or-line::after{content:"";flex:1;height:1px;background:rgba(15,23,42,0.06);border-radius:1px}
+    .muted{color:#6b7280;font-size:14px}
+    .login-card::after{
+      content:"";
+      position:absolute;
+      left:6%;
+      right:6%;
+      bottom:-18px;
+      height:24px;
+      border-radius:12px;
+      filter:blur(18px);
+      background: linear-gradient(90deg, rgba(11,118,209,0.12), rgba(11,118,209,0.03));
+      z-index:-1;
+    }
+    @media(max-width:980px){
+      .login-panel{grid-template-columns:1fr;padding:0 6px;gap:22px}
+      .login-card{order:-1;max-width:540px;margin:0 auto}
+      .hero-title{font-size:34px}
+      .hero-left{padding:28px;min-height:240px;border-radius:12px}
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>تسجيل الدخول</h1>
-    <input type="text" id="emailOrPhone" placeholder="الإيميل أو رقم الجوال">
-    <input type="password" id="password" placeholder="كلمة المرور">
-    <button onclick="login()">تسجيل الدخول</button>
-  </div>
+  <main class="login-hero">
+    <div class="login-panel">
+
+      <!-- LEFT: marketing -->
+      <div class="hero-left" aria-hidden>
+        <div class="brand">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <rect width="24" height="24" rx="6" fill="#fff" opacity="0.12"></rect>
+            <path d="M6 12h12" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          <h1>اطبع — خدمة الطباعة</h1>
+        </div>
+
+        <h2 class="hero-title">خدمة الطباعة<br>أسهل وأجود من أي وقت</h2>
+
+        <p class="hero-sub">
+          اطبع مستنداتك وصورك وموادك الدعائية بجودة احترافية — تغليف وتوصيل داخل المدينة، مع خيارات الورق والتغليف.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn" href="order.html">اطلب الآن</a>
+          <a class="btn secondary" href="prices.html">الأسعار</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: login card -->
+      <div class="login-card" role="region" aria-label="نموذج تسجيل الدخول">
+        <h3>تسجيل الدخول</h3>
+        <div class="small-desc">سجّل الدخول بالإيميل أو رقم الجوال — أو جرّبي الدخول السريع لتجربة الواجهة.</div>
+
+        <div class="form-row">
+          <input id="emailOrPhone" type="text" placeholder="البريد الإلكتروني أو رقم الجوال" autocomplete="username">
+        </div>
+
+        <div class="form-row">
+          <input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+        </div>
+
+        <div class="login-actions">
+          <button id="loginBtn" class="btn">دخول</button>
+          <button id="guestBtn" class="btn secondary">تجربة سريعة</button>
+        </div>
+
+        <div class="or-line" style="margin-top:10px">أو</div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="muted">ليس لديك حساب؟ <a href="register.html" style="color:var(--accent);text-decoration:none;font-weight:700">سجل الآن</a></div>
+          <div class="muted"><a href="forgot.html" style="color:var(--accent);text-decoration:none">نسيت كلمة المرور؟</a></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
 
   <script>
-    function login() {
-      const emailOrPhone = document.getElementById('emailOrPhone').value;
-      const password = document.getElementById('password').value;
-
-      if(emailOrPhone && password) {
-        // إذا تحبين ممكن تضيفين تحقق من البيانات هنا
-        window.location.href = 'dashboard.html';
-      } else {
-        alert('الرجاء إدخال جميع البيانات');
+    // إذا المستخدم مسجل سابقاً نوجهه للداشبورد مباشرة
+    (function(){
+      const ok = sessionStorage.getItem('print_logged_in');
+      if(ok === '1'){
+        window.location.replace('dashboard.html');
       }
-    }
+    })();
+
+    // سلوك زر دخول (محاكاة). لاحقاً نربطه بالـ backend.
+    document.getElementById('loginBtn').addEventListener('click', function(){
+      const id = document.getElementById('emailOrPhone').value.trim();
+      const pw = document.getElementById('password').value.trim();
+      if(!id || !pw){
+        alert('الرجاء إدخال الإيميل/الرقم وكلمة المرور');
+        return;
+      }
+      sessionStorage.setItem('print_logged_in','1');
+      window.location.href = 'dashboard.html';
+    });
+
+    document.getElementById('guestBtn').addEventListener('click', function(){
+      sessionStorage.setItem('print_logged_in','1');
+      window.location.href = 'dashboard.html';
+    });
   </script>
 </body>
 </html>
