@@ -68,7 +68,7 @@ h1 .big { display: block; font-size: 56px; font-weight: 900; color: #0b2f56; mar
    ORDER FORM (existing)
    ========================= */
 #appArea { max-width: 1000px; margin: 0 auto; padding: 30px 15px; }
-#orderForm { background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 18px; }
+#orderForm { background: rgba(150,150,172,0.3); padding: 24px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 18px; }
 #orderForm label { font-weight: 600; color: #0f172a; margin-bottom: 6px; }
 #orderForm input, #orderForm select { padding: 12px 14px; border-radius: 6px; border: 1px solid #e6eef9; font-size: 15px; outline: none; width: 100%; }
 #orderForm input:focus, #orderForm select:focus { border-color: #0b76d1; box-shadow: 0 4px 18px rgba(11,118,209,0.08); }
