@@ -126,7 +126,7 @@ h1 .big { display: block; font-size: 56px; font-weight: 900; color: #0b2f56; mar
 /* =========================
    SUPPORT page (cards)
    ========================= */
-.support-section { text-align: center; padding: 60px 20px; background: #f8fafc; min-height: 100vh; }
+.support-section { text-align: center; padding: 60px 20px;  min-height: 100vh; }
 .page-title { font-size: 32px; margin-bottom: 15px; color: #0b76d1; }
 .support-intro { font-size: 18px; color: #333; margin-bottom: 40px; max-width:900px; margin-left:auto; margin-right:auto; }
 .support-card { background: white; max-width: 560px; margin: 20px auto; padding: 25px; border-radius: 16px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); transition: 0.18s; text-align: center; }
