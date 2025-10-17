@@ -7,14 +7,15 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
-// المجلد الرئيسي للواجهة (HTML, CSS, JS) هو مجلد فوق backend
+
 app.use(express.static(path.join(__dirname, '..'))); 
 
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
 if(!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR);
 
-// multer لقبول PDF و صور
+
 const storage = multer.diskStorage({
   destination: (req,file,cb)=>cb(null,UPLOADS_DIR),
   filename: (req,file,cb)=>{
@@ -45,11 +46,35 @@ function saveOrders(arr){
   fs.writeFileSync(ORDERS_FILE, JSON.stringify(arr,null,2));
 }
 
-// رفع ملف
+
 app.post('/api/upload', upload.single('file'), (req,res)=>{
   try{
     if(!req.file) return res.status(400).json({ message: 'محتاج ملف PDF أو صورة' });
-    const { paperSize='', printType='', packaging='', delivery='', itemType='' } = req.body;
+
+   
+    const {
+      paperSize='',
+      printType='',
+      packaging='',
+      delivery='',
+      itemType='',
+      phone='',
+      address=''
+    } = req.body;
+
+    if(delivery === 'home'){
+      if(!phone || !address){
+        return res.status(400).json({ message: 'للتوصيل للبيت: مطلوب رقم الهاتف والعنوان' });
+      }
+    }
+
+  
+    const phoneNormalized = (phone || '').trim();
+    if(phoneNormalized && !/^07\d{9}$/.test(phoneNormalized)){
+     
+      return res.status(400).json({ message: 'رقم الهاتف لازم يكون بصيغة 07xxxxxxxxx' });
+    }
+
     const orders = readOrders();
     const orderId = 'ORD-' + Date.now().toString(36).toUpperCase().slice(-6);
     const newOrder = {
@@ -61,6 +86,8 @@ app.post('/api/upload', upload.single('file'), (req,res)=>{
       packaging,
       delivery,
       itemType,
+      phone: phoneNormalized,
+      address: (address || '').trim(),
       status: 'جديد',
       createdAt: new Date().toISOString()
     };
@@ -73,13 +100,13 @@ app.post('/api/upload', upload.single('file'), (req,res)=>{
   }
 });
 
-// جلب الطلبات
+
 app.get('/api/orders',(req,res)=>{
   const orders = readOrders();
   res.json(orders);
 });
 
-// serve uploaded files
+
 app.use('/uploads', express.static(UPLOADS_DIR));
 
 const PORT = process.env.PORT || 3000;

@@ -82,16 +82,58 @@
               <option value="magazine">مجلة</option>
               <option value="notebook">ملزمة عادية</option>
               <option value="document">مستند / PDF</option>
-              <option value="packaging">خدمة تغليف</option>
-              <option value="delivery">توصيل</option>
+       
+            </select>
+          </div>
+
+               <div class="field">
+            <label>اختر نوع الورق </label>
+            <select name="itemType" id="itemTypeSelect">
+              <option value="image">ورق عادي</option>
+              <option value="poster">ورق مقوى</option>
+              <option value="magazine">ورق لماع</option>
+              <option value="notebook">ورق لاصق </option>
+              <option value="document"> ورق مجلات </option>
+       
             </select>
           </div>
         </div>
+            
+        
+<div class="row">
+  <div class="field">
+    <label>عدد النسخ</label>
+    <div class="qty">
+     
+      <input type="number" name="copies" id="copiesInput" value="1" min="1" required>
+  
+    </div>
+  </div>
+</div>
 
+
+           <div class="row">
+          <div class="field">
+            <label>رقم الهاتف</label>
+            <input type="tel" name="phone" id="phoneInput" placeholder="مثال: 07701234567" pattern="07[0-9]{9}" required>
+          </div>
+          <div class="field">
+            <label>العنوان</label>
+            <input type="text" name="address" id="addressInput" placeholder="اكتب عنوانك الكامل" required>
+          </div>
+          
+        </div>
+
+        <div class="field">
+            <label>اضف ملاحظاتك</label>
+            <input type="text" name="note" id="noteInput" placeholder="اكتب ملاحظاتك هنا " required>
+          </div>
         <!-- hidden extras filled from prices page (size/pages/notes) -->
         <input type="hidden" name="sizeHint" id="sizeHint">
         <input type="hidden" name="pages" id="pagesInput">
         <input type="hidden" name="notes" id="notesInput">
+
+
 
         <button type="submit" class="btn primary full">إرسال الطلب</button>
         <div id="result" class="result"></div>

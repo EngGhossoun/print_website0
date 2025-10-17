@@ -1,6 +1,5 @@
-// app.js — يدعم index.html (hero) و order.html (form + orders + modal + preselect + size/pages)
 document.addEventListener("DOMContentLoaded", () => {
-  /* ---------------- HERO form (index.html) ---------------- */
+
   const heroForm = document.getElementById("heroForm");
   if (heroForm) {
     const emailInput = document.getElementById("emailInput");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------------- ORDER page logic (order.html) ---------------- */
   const orderForm = document.getElementById("orderForm");
   const resultEl = document.getElementById("result");
   const ordersList = document.getElementById("ordersList");
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const notesInput = document.getElementById("notesInput");
   const sizeHintInput = document.getElementById("sizeHint");
 
-  // preselect itemType + size + pages + color from query param ?type=poster&size=A3&pages=50&color=color
   function preselectFromQuery() {
     try {
       const params = new URLSearchParams(window.location.search);
@@ -42,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const notes = params.get('notes');
 
       if (t && itemTypeSelect) {
-        // map aliases to select values if necessary
         const map = {
           image: 'image',
           poster: 'poster',
@@ -58,10 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (size && paperSizeSelect) {
-        // try set paper size if option exists
         const optSize = Array.from(paperSizeSelect.options).find(o => o.value.toLowerCase() === size.toLowerCase());
         if (optSize) paperSizeSelect.value = optSize.value;
-        // also keep hint
         sizeHintInput.value = size;
       }
 
@@ -79,14 +73,76 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   preselectFromQuery();
 
-  // modal handlers
+  // --- إضافة تحكم عدد النسخ (إن لم يكن موجود في HTML) ---
+  function ensureCopiesControls() {
+    // إذا موجود بالفعل، ما نسوي شي
+    if (document.getElementById('copiesInput')) return;
+
+    // حاول نضيف بعد حقل itemTypeSelect لو متوفر، وإلا نضيف آخر الفورم
+    const container = document.createElement('div');
+    container.className = 'row';
+    container.innerHTML = `
+      <div class="field">
+        <label>عدد النسخ</label>
+        <div class="qty" style="display:flex;align-items:center;gap:8px">
+          <button type="button" id="decBtn" class="qty-btn" aria-label="نقص">−</button>
+          <input type="number" name="copies" id="copiesInput" value="1" min="1" required style="width:72px;text-align:center;padding:6px;border-radius:6px;border:1px solid #ddd">
+          <button type="button" id="incBtn" class="qty-btn" aria-label="زيادة">+</button>
+        </div>
+      </div>
+    `;
+
+    if (itemTypeSelect && itemTypeSelect.parentElement && itemTypeSelect.parentElement.parentElement) {
+      // حاول نضع بعد السطر اللي يحتوي itemTypeSelect
+      const rowElem = itemTypeSelect.closest('.row') || itemTypeSelect.parentElement;
+      if (rowElem && rowElem.parentElement) {
+        rowElem.parentElement.insertBefore(container, rowElem.nextSibling);
+        return;
+      }
+    }
+
+    // fallback: ضعه قبل زر الإرسال
+    const submitBtn = orderForm.querySelector('button[type="submit"]');
+    orderForm.insertBefore(container, submitBtn);
+  }
+
+  // استدعاء التضمين
+  if (orderForm) ensureCopiesControls();
+
+  // الآن اربط أحداث الأزرار والتحقق
+  function setupCopiesBehavior() {
+    const inc = document.getElementById('incBtn');
+    const dec = document.getElementById('decBtn');
+    const copies = document.getElementById('copiesInput');
+
+    if (!copies) return;
+
+    // زيادة ونقصان بالضغط
+    if (inc) inc.addEventListener('click', () => {
+      copies.value = Math.max(1, parseInt(copies.value || '0', 10) + 1);
+      copies.dispatchEvent(new Event('change'));
+    });
+    if (dec) dec.addEventListener('click', () => {
+      copies.value = Math.max(1, parseInt(copies.value || '1', 10) - 1);
+      copies.dispatchEvent(new Event('change'));
+    });
+
+    // منع قيمة أقل من 1 عند الكتابة يدويًا
+    copies.addEventListener('input', () => {
+      if (copies.value === '') return;
+      const v = parseInt(copies.value, 10);
+      if (isNaN(v) || v < 1) copies.value = 1;
+    });
+  }
+  setupCopiesBehavior();
+ 
+
   if (contactBtn && contactModal && closeModal) {
     contactBtn.addEventListener("click", () => contactModal.classList.remove("hidden"));
     closeModal.addEventListener("click", () => contactModal.classList.add("hidden"));
     window.addEventListener("click", (e) => { if (e.target === contactModal) contactModal.classList.add("hidden"); });
   }
 
-  // submit order (upload)
   if (orderForm) {
     orderForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -94,15 +150,21 @@ document.addEventListener("DOMContentLoaded", () => {
       resultEl.style.color = "black";
       resultEl.textContent = "جاري إرسال الطلب...";
 
+      
+      const copiesEl = document.getElementById('copiesInput');
+      if (copiesEl && (!copiesEl.value || parseInt(copiesEl.value, 10) < 1)) {
+        copiesEl.value = 1;
+      }
+
       const fd = new FormData(orderForm);
-      // append pages/notes/sizeHint if present (they are hidden inputs so already in form)
+
       const file = fd.get("file");
       if (!file) {
         resultEl.style.color = "crimson";
         resultEl.textContent = "اختاري ملف قبل الإرسال";
         return;
       }
-      // allowed types
+
       const allowedTypes = ["application/pdf", "image/jpeg", "image/png", "image/gif"];
       if (!allowedTypes.includes(file.type)) {
         resultEl.style.color = "crimson";
@@ -122,6 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
           resultEl.style.color = "green";
           resultEl.textContent = "تم إنشاء الطلب: " + data.orderId;
           orderForm.reset();
+          // بعد reset نعيد القيمة الافتراضية للنسخ الى 1
+          const afterCopies = document.getElementById('copiesInput');
+          if (afterCopies) afterCopies.value = 1;
           history.replaceState({}, '', window.location.pathname); // remove query params to avoid re-preselect
           fetchOrders();
         } else {
@@ -135,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // fetch and render orders
+
     async function fetchOrders() {
       if (!ordersList) return;
       ordersList.innerHTML = "<p style='color:gray'>جاري جلب الطلبات...</p>";
@@ -169,20 +234,22 @@ document.addEventListener("DOMContentLoaded", () => {
         d.innerHTML = `
           <p><b>رقم الطلب:</b> ${order.orderId}</p>
           <div>${fileHtml}</div>
-          <p><b>حجم الورق:</b> ${order.paperSize}${order.sizeHint ? ' ('+order.sizeHint+')' : ''}</p>
-          <p><b>نوع الطباعة:</b> ${order.printType}</p>
+          <p><b>حجم الورق:</b> ${order.paperSize || '—'}${order.sizeHint ? ' ('+order.sizeHint+')' : ''}</p>
+          <p><b>نوع الطباعة:</b> ${order.printType || '—'}</p>
           <p><b>نوع العنصر:</b> ${order.itemType || '—'}</p>
           ${order.pages ? `<p><b>عدد الصفحات:</b> ${order.pages}</p>` : ''}
           ${order.notes ? `<p><b>ملاحظة:</b> ${order.notes}</p>` : ''}
-          <p><b>تغليف:</b> ${order.packaging}</p>
-          <p><b>توصيل:</b> ${order.delivery}</p>
+          <p><b>تغليف:</b> ${order.packaging || '—'}</p>
+          <p><b>توصيل:</b> ${order.delivery || '—'}</p>
+          ${order.copies ? `<p><b>عدد النسخ:</b> ${order.copies}</p>` : ''}
+          ${order.phone ? `<p><b>هاتف العميل:</b> ${order.phone}</p>` : ''}
+          ${order.address ? `<p><b>عنوان العميل:</b> ${order.address}</p>` : ''}
           <p><b>الحالة:</b> ${order.status || 'جديد'}</p>
         `;
         ordersList.appendChild(d);
       });
     }
 
-    // initial load
     fetchOrders();
   }
 });
